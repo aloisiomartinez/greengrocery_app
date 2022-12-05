@@ -21,12 +21,12 @@ class SignInScreen extends StatelessWidget {
                 color: Colors.white,
                 borderRadius: BorderRadius.vertical(top: Radius.circular(45))),
             child: Column(
-              children: const [
+              children: [
                 CustomTextField(icon: Icons.email, label: "Email"),
                 CustomTextField(
                   icon: Icons.lock,
                   label: "Senha",
-                  isObscure: true,
+                  isSecret: true,
                 )
               ],
             ),

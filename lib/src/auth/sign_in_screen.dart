@@ -2,6 +2,7 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:green_grocery/src/auth/components/custom_text_field.dart';
 import 'package:green_grocery/src/auth/sign_up_screen.dart';
+import 'package:green_grocery/src/base/base_screen.dart';
 import 'package:green_grocery/src/config/custom_colors.dart';
 
 class SignInScreen extends StatelessWidget {
@@ -85,7 +86,12 @@ class SignInScreen extends StatelessWidget {
                           style: ElevatedButton.styleFrom(
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(18))),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(builder: (context) {
+                              return const BaseScreen();
+                            }));
+                          },
                           child: const Text(
                             "Entrar",
                             style: TextStyle(fontSize: 18),

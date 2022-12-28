@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:green_grocery/src/models/cart_item_model.dart';
 import 'package:green_grocery/src/models/order_model.dart';
+import 'package:green_grocery/src/pages/orders/components/order_status_widget.dart';
 import 'package:green_grocery/src/services/utils_services.dart';
 
 class OrderTile extends StatelessWidget {
@@ -16,6 +17,7 @@ class OrderTile extends StatelessWidget {
         child: Theme(
           data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
           child: ExpansionTile(
+            initiallyExpanded: order.status == 'pending_payment',
             title: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -29,27 +31,38 @@ class OrderTile extends StatelessWidget {
             ),
             childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
             children: [
-              SizedBox(
-                height: 150,
+              // Lista de Produtos
+              IntrinsicHeight(
                 child: Row(
                   children: [
                     Expanded(
                       flex: 3,
-                      child: ListView(
-                        children: order.items.map((orderItem) {
-                          return _OrderItemWidget(
-                            utilsServices: utilsServices,
-                            orderItem: orderItem,
-                          );
-                        }).toList(),
+                      child: SizedBox(
+                        height: 150,
+                        child: ListView(
+                          children: order.items.map((orderItem) {
+                            return _OrderItemWidget(
+                              utilsServices: utilsServices,
+                              orderItem: orderItem,
+                            );
+                          }).toList(),
+                        ),
                       ),
                     ),
+                    // Divisão
+                    VerticalDivider(
+                      color: Colors.grey.shade300,
+                      thickness: 2,
+                      width: 8,
+                    ),
+                    //Status do Pedido
                     Expanded(
-                      flex: 2,
-                      child: Container(
-                        color: Colors.blue,
-                      ),
-                    )
+                        flex: 2,
+                        child: OrderStatusWidget(
+                          status: order.status,
+                          isOverdue:
+                              order.overdueDateTime.isBefore(DateTime.now()),
+                        ))
                   ],
                 ),
               )

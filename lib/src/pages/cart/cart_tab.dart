@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:green_grocery/src/models/cart_item_model.dart';
 import 'package:green_grocery/src/pages/cart/components/cart_tile.dart';
+import 'package:green_grocery/src/pages/common_widgets/payment_dialog.dart';
 import 'package:green_grocery/src/services/utils_services.dart';
 import 'package:green_grocery/src/config/app_data.dart' as appData;
 import '../../config/custom_colors.dart';
@@ -84,7 +85,16 @@ class _CartTabState extends State<CartTab> {
                         onPressed: () async {
                           bool? result = await showOrderConfirmation();
 
-                          
+                          if (result ?? false) {
+                            showDialog(
+                              context: context,
+                              builder: (_) {
+                                return PaymentDialog(
+                                  order: appData.orders.first,
+                                );
+                              },
+                            );
+                          }
                         },
                         child: const Text(
                           "Concluir pedido",
@@ -120,8 +130,7 @@ class _CartTabState extends State<CartTab> {
                       borderRadius: BorderRadius.circular(20)),
                 ),
                 onPressed: () {
-                Navigator.of(context).pop(true);
-
+                  Navigator.of(context).pop(true);
                 },
                 child: const Text("Sim"))
           ],

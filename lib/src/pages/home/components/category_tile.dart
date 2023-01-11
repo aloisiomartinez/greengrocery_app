@@ -17,6 +17,7 @@ class CategoryTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      borderRadius: BorderRadius.circular(30),
       onTap: onPressed,
       child: Align(
         alignment: Alignment.center,

@@ -1,6 +1,7 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:green_grocery/src/pages/auth/controller/auth_controller.dart';
 import 'package:green_grocery/src/pages/common_widgets/app_name_widget.dart';
 import 'package:green_grocery/src/pages/common_widgets/custom_text_field.dart';
 import 'package:green_grocery/src/config/custom_colors.dart';
@@ -102,25 +103,36 @@ class SignInScreen extends StatelessWidget {
                       ),
                       SizedBox(
                         height: 50,
-                        child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(18))),
-                            onPressed: () {
-                              if (_formKey.currentState!.validate()) {
-                                String email = emailController.text;
-                                String password = passwordController.text;
+                        child: GetX<AuthController>(
+                          builder: (authController) {
+                            return ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(18))),
+                              onPressed: authController.isLoading.value ? null :() {
+                                FocusScope.of(context).unfocus();
+                                if (_formKey.currentState!.validate()) {
+                                  String email = emailController.text;
+                                  String password = passwordController.text;
 
-                                //Get.offNamed(PagesRoutes.baseRoute);
+                                  authController.signIn(
+                                      email: email, password: password);
 
-                              } else {
-                                print("Campos não validos");
-                              }
-                            },
-                            child: const Text(
-                              "Entrar",
-                              style: TextStyle(fontSize: 18),
-                            )),
+                                  //Get.offNamed(PagesRoutes.baseRoute);
+
+                                } else {
+                                  print("Campos não validos");
+                                }
+                              },
+                              child: authController.isLoading.value
+                                  ? const CircularProgressIndicator()
+                                  : const Text(
+                                      "Entrar",
+                                      style: TextStyle(fontSize: 18),
+                                    ),
+                            );
+                          },
+                        ),
                       ),
                       Align(
                         alignment: Alignment.centerRight,

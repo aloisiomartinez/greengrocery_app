@@ -1,10 +1,10 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:green_grocery/src/pages/common_widgets/app_name_widget.dart';
 import 'package:green_grocery/src/pages/common_widgets/custom_text_field.dart';
-import 'package:green_grocery/src/pages/auth/sign_up_screen.dart';
-import 'package:green_grocery/src/pages/base/base_screen.dart';
 import 'package:green_grocery/src/config/custom_colors.dart';
+import 'package:green_grocery/src/pages_routes/app_pages.dart';
 
 class SignInScreen extends StatelessWidget {
   const SignInScreen({Key? key}) : super(key: key);
@@ -77,10 +77,7 @@ class SignInScreen extends StatelessWidget {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(18))),
                           onPressed: () {
-                            Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(builder: (context) {
-                              return const BaseScreen();
-                            }));
+                            Get.offNamed(PagesRoutes.baseRoute);
                           },
                           child: const Text(
                             "Entrar",
@@ -129,10 +126,7 @@ class SignInScreen extends StatelessWidget {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(18))),
                           onPressed: () {
-                            Navigator.of(context)
-                                .push(MaterialPageRoute(builder: (context) {
-                              return SignUpScreen();
-                            }));
+                            Get.toNamed(PagesRoutes.signUpRoute);
                           },
                           child: const Text(
                             "Criar conta",

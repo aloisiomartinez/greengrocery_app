@@ -10,6 +10,8 @@ class SignInScreen extends StatelessWidget {
   SignInScreen({Key? key}) : super(key: key);
 
   final _formKey = GlobalKey<FormState>();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -69,21 +71,20 @@ class SignInScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       CustomTextField(
+                        controller: emailController,
                         icon: Icons.email,
                         label: "Email",
                         validator: (email) {
-                          print("emaill $email");
                           if (email == null || email.isEmpty) {
                             return 'Digite seu email!';
                           }
 
                           if (!email.isEmail) return 'Digite um email válido!';
                           return null;
-
-                         
                         },
                       ),
                       CustomTextField(
+                        controller: passwordController,
                         icon: Icons.lock,
                         label: "Senha",
                         isSecret: true,
@@ -106,14 +107,15 @@ class SignInScreen extends StatelessWidget {
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(18))),
                             onPressed: () {
-                              if(_formKey.currentState!.validate()) {
-                                print("Todos os campos estão validos");
+                              if (_formKey.currentState!.validate()) {
+                                String email = emailController.text;
+                                String password = passwordController.text;
+
+                                //Get.offNamed(PagesRoutes.baseRoute);
+
                               } else {
                                 print("Campos não validos");
-
                               }
-
-                              //Get.offNamed(PagesRoutes.baseRoute);
                             },
                             child: const Text(
                               "Entrar",

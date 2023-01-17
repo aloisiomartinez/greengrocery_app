@@ -1,5 +1,6 @@
 
 import 'package:green_grocery/src/constants/endpoints.dart';
+import 'package:green_grocery/src/models/user_model.dart';
 import 'package:green_grocery/src/services/http_manager.dart';
 
 class AuthRepository {
@@ -16,10 +17,12 @@ class AuthRepository {
     );
 
     if(result['result'] != null) {
-      print('SignIn funcionou!');
 
+     final user = UserModel.fromMap(result['result']);
+      
     } else {
       print('SignIn não funcionou!');
+      print(result['error']);
     }
 
 

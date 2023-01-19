@@ -18,7 +18,7 @@ class AuthRepository {
 
     if(result['result'] != null) {
 
-     final user = UserModel.fromMap(result['result']);
+     final user = UserModel.fromJson(result['result']);
       
     } else {
       print('SignIn não funcionou!');

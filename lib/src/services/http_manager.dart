@@ -33,7 +33,7 @@ class HttpManager {
           ),
           data: body);
 
-          return response.data;
+      return response.data;
     } on DioError catch (error) {
       return error.response?.data ?? {};
     } catch (error) {

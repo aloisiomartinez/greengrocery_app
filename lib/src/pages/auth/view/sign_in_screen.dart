@@ -2,10 +2,12 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:green_grocery/src/pages/auth/controller/auth_controller.dart';
+import 'package:green_grocery/src/pages/auth/view/components/forgot_password_dialog.dart';
 import 'package:green_grocery/src/pages/common_widgets/app_name_widget.dart';
 import 'package:green_grocery/src/pages/common_widgets/custom_text_field.dart';
 import 'package:green_grocery/src/config/custom_colors.dart';
 import 'package:green_grocery/src/pages_routes/app_pages.dart';
+import 'package:green_grocery/src/services/utils_services.dart';
 import 'package:green_grocery/src/services/validators.dart';
 
 class SignInScreen extends StatelessWidget {
@@ -14,6 +16,7 @@ class SignInScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final utilsServices = UtilsServices();
 
   @override
   Widget build(BuildContext context) {
@@ -105,7 +108,6 @@ class SignInScreen extends StatelessWidget {
                                             email: email, password: password);
 
                                         //Get.offNamed(PagesRoutes.baseRoute);
-
                                       } else {
                                         print("Campos não validos");
                                       }
@@ -123,7 +125,21 @@ class SignInScreen extends StatelessWidget {
                       Align(
                         alignment: Alignment.centerRight,
                         child: TextButton(
-                            onPressed: () {},
+                            onPressed: () async {
+                              final bool? result = await showDialog(
+                                context: context,
+                                builder: (_) {
+                                  return ForgotPasswordDialog(
+                                      email: emailController.text);
+                                },
+                              );
+
+                              if (result ?? false) {
+                                utilsServices.showToast(
+                                    message:
+                                        'Link de recuperação foi enviado para seu email');
+                              }
+                            },
                             child: Text(
                               "Esqueceu a senha?",
                               style: TextStyle(

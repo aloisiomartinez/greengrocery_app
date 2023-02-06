@@ -96,4 +96,8 @@ class AuthController extends GetxController {
     //Ir para o Login
     Get.offAllNamed(PagesRoutes.signInRoute);
   }
+
+  Future<void> resetPassword(String email) async {
+    await authRepository.resetPassowrd(email);
+  }
 }

@@ -64,10 +64,7 @@ class AuthController extends GetxController {
     });
   }
 
-  Future<void> signUp({
-    required String email,
-    required String password,
-  }) async {
+  Future<void> signUp() async {
     isLoading.value = true;
 
     AuthResult result = await authRepository.signUp(user);
@@ -86,8 +83,7 @@ class AuthController extends GetxController {
   void saveTokenAndProceedToBase() {
     utilsServices.saveLocalData(key: StorageKeys.token, data: user.token!);
 
-    Get.offAllNamed(PagesRoutes.signInRoute);
-    //Get.offAllNamed(PagesRoutes.baseRoute);
+    Get.offAllNamed(PagesRoutes.baseRoute);
   }
 
   Future<void> signOut() async {

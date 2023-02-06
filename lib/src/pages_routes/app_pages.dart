@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 
 import 'package:green_grocery/src/pages/base/base_screen.dart';
+import 'package:green_grocery/src/pages/home/binding/home_binding.dart';
 import 'package:green_grocery/src/pages/splash/splash_screen.dart';
 
 import '../pages/auth/view/sign_in_screen.dart';
@@ -20,10 +21,12 @@ abstract class AppPages {
       name: PagesRoutes.signUpRoute,
       page: () => SignUpScreen(),
     ),
-     GetPage(
-      name: PagesRoutes.baseRoute,
-      page: () =>  const BaseScreen(),
-    ),
+    GetPage(
+        name: PagesRoutes.baseRoute,
+        page: () => const BaseScreen(),
+        bindings: [
+          HomeBinding(),
+        ]),
   ];
 }
 
@@ -32,5 +35,4 @@ abstract class PagesRoutes {
   static const String signUpRoute = "/signup";
   static const String splashRoute = "/splash";
   static const String baseRoute = "/";
-
 }

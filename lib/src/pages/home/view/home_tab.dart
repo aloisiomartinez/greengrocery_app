@@ -5,10 +5,10 @@ import 'package:badges/badges.dart' as badge;
 import 'package:get/get.dart';
 import 'package:green_grocery/src/config/custom_colors.dart';
 import 'package:green_grocery/src/pages/common_widgets/custom_shmmer.dart';
-import 'package:green_grocery/src/pages/home/components/item_tile.dart';
+import 'package:green_grocery/src/pages/home/view/components/item_tile.dart';
 import 'package:green_grocery/src/pages/home/controller/home_controller.dart';
 import 'package:green_grocery/src/services/utils_services.dart';
-import '../common_widgets/app_name_widget.dart';
+import '../../common_widgets/app_name_widget.dart';
 import 'components/category_tile.dart';
 import 'package:green_grocery/src/config/app_data.dart' as appData;
 

@@ -20,15 +20,12 @@ class HomeTab extends StatefulWidget {
 
 class _HomeTabState extends State<HomeTab> {
   GlobalKey<CartIconKey> globalKeyCartItems = GlobalKey<CartIconKey>();
+
+  final searchController = TextEditingController();
   late Function(GlobalKey) runAddToCardAnimation;
 
   void itemSelectedCartAnimations(GlobalKey gkImage) {
     runAddToCardAnimation(gkImage);
-  }
-
-  @override
-  void initState() {
-    super.initState();
   }
 
   final UtilsServices utilsServices = UtilsServices();
@@ -74,28 +71,43 @@ class _HomeTabState extends State<HomeTab> {
           child: Column(
             children: [
               //Campo de Pesquisa
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                child: TextFormField(
-                  decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white,
-                      isDense: true,
-                      hintText: 'Pesquise aqui...',
-                      hintStyle:
-                          TextStyle(color: Colors.grey.shade400, fontSize: 14),
-                      prefixIcon: Icon(
-                        Icons.search,
-                        color: CustomColors.customContrastColor,
-                        size: 21,
-                      ),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(60),
-                          borderSide: const BorderSide(
-                              width: 0, style: BorderStyle.none))),
-                ),
-              ),
+              GetBuilder<HomeController>(builder: (controller) {
+                return Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                  child: TextFormField(
+                    controller: searchController,
+                    onChanged: (value) {
+                      controller.searchTitle.value = value;
+                    },
+                    decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Colors.white,
+                        isDense: true,
+                        hintText: 'Pesquise aqui...',
+                        hintStyle: TextStyle(
+                            color: Colors.grey.shade400, fontSize: 14),
+                        prefixIcon: Icon(
+                          Icons.search,
+                          color: CustomColors.customContrastColor,
+                          size: 21,
+                        ),
+                        suffixIcon: controller.searchTitle.value.isNotEmpty
+                            ? IconButton(
+                                onPressed: () {},
+                                icon: Icon(
+                                  Icons.close,
+                                  color: CustomColors.customContrastColor,
+                                  size: 21,
+                                ))
+                            : null,
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(60),
+                            borderSide: const BorderSide(
+                                width: 0, style: BorderStyle.none))),
+                  ),
+                );
+              }),
 
               // Categorias
               GetBuilder<HomeController>(builder: (controller) {

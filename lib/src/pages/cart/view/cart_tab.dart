@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:green_grocery/src/models/cart_item_model.dart';
-import 'package:green_grocery/src/pages/cart/components/cart_tile.dart';
+import 'package:green_grocery/src/pages/cart/view/components/cart_tile.dart';
 import 'package:green_grocery/src/pages/common_widgets/payment_dialog.dart';
 import 'package:green_grocery/src/services/utils_services.dart';
 import 'package:green_grocery/src/config/app_data.dart' as appData;
-import '../../config/custom_colors.dart';
+import '../../../config/custom_colors.dart';
 
 class CartTab extends StatefulWidget {
   const CartTab({Key? key}) : super(key: key);
@@ -20,8 +20,8 @@ class _CartTabState extends State<CartTab> {
     setState(() {
       appData.cartItems.remove(cartItem);
 
-
-      utilsServices.showToast(message: "${cartItem.item.itemName } removido(a) do carrinho");
+      utilsServices.showToast(
+          message: "${cartItem.item.itemName} removido(a) do carrinho");
     });
   }
 
@@ -98,8 +98,8 @@ class _CartTabState extends State<CartTab> {
                               },
                             );
                           } else {
-                                  utilsServices.showToast(message: "Pedido não confirmado" );
-
+                            utilsServices.showToast(
+                                message: "Pedido não confirmado");
                           }
                         },
                         child: const Text(

@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 
 import 'package:green_grocery/src/pages/base/base_screen.dart';
+import 'package:green_grocery/src/pages/cart/binding/cart_binding.dart';
 import 'package:green_grocery/src/pages/home/binding/home_binding.dart';
 import 'package:green_grocery/src/pages/splash/splash_screen.dart';
 
@@ -26,6 +27,7 @@ abstract class AppPages {
         page: () => const BaseScreen(),
         bindings: [
           HomeBinding(),
+          CartBinding(),
         ]),
   ];
 }

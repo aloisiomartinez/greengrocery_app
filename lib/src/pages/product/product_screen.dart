@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:green_grocery/src/config/custom_colors.dart';
 import 'package:green_grocery/src/models/item_model.dart';
+import 'package:green_grocery/src/pages/cart/controller/cart_controller.dart';
 import 'package:green_grocery/src/pages/common_widgets/quantity_widget.dart';
 import 'package:green_grocery/src/services/utils_services.dart';
 
@@ -17,6 +19,8 @@ class _ProductScreenState extends State<ProductScreen> {
   final UtilsServices utilsServices = UtilsServices();
 
   int cartItemQuantity = 1;
+
+  final cartController = Get.find<CartController>();
 
   @override
   Widget build(BuildContext context) {
@@ -101,7 +105,14 @@ class _ProductScreenState extends State<ProductScreen> {
                           style: ElevatedButton.styleFrom(
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(15))),
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.back();
+
+                            cartController.addItemToCart(
+                              item: widget.item,
+                              quantity: cartItemQuantity,
+                            );
+                          },
                           icon: const Icon(
                             Icons.shopping_cart_outlined,
                             color: Colors.white,

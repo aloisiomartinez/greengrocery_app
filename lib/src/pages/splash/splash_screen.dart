@@ -18,9 +18,9 @@ class SplashScreen extends StatelessWidget {
               CustomColors.customSwatchColor,
               CustomColors.customSwatchColor.shade700
             ])),
-        child: Column(
+        child: const Column(
           mainAxisSize: MainAxisSize.min,
-          children: const [
+          children: [
             AppNameWidget(
               greenTitleColor: Colors.white,
               textSize: 40,

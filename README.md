@@ -2,7 +2,7 @@
 # GreenGroceryApp
 
 App de loja online, nele é possível fazer autenticação, buscar produtos e adicionar ao carrinho, realizar pagamento via Pix.
-![login](https://github.com/aloisiomartinez/greengrocery_app/assets/41764501/81508525-4ec0-41a3-bb7b-ceaa088272c0)
+
 
 
 
@@ -14,4 +14,8 @@ App de loja online, nele é possível fazer autenticação, buscar produtos e ad
 - Build_runner
 - Json_serializable
 
-![orders](https://github.com/aloisiomartinez/greengrocery_app/assets/41764501/373c7f02-5772-4dd8-8e17-7b02521ca687)
+## Screenshots
+![flutter_01](https://github.com/aloisiomartinez/greengrocery_app/assets/41764501/ba3559fd-baa8-4928-b694-f12023b90b12)
+![flutter_02](https://github.com/aloisiomartinez/greengrocery_app/assets/41764501/54a422d0-d32e-4189-8d53-6b678511794a)
+![flutter_04](https://github.com/aloisiomartinez/greengrocery_app/assets/41764501/689eba6b-e47f-4ad2-85db-57bcd1794d5a)
+

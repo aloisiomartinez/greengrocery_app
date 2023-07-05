@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badge;
 import 'package:get/get.dart';
 import 'package:green_grocery/src/config/custom_colors.dart';
+import 'package:green_grocery/src/pages/cart/controller/cart_controller.dart';
 import 'package:green_grocery/src/pages/common_widgets/custom_shmmer.dart';
 import 'package:green_grocery/src/pages/home/controller/home_controller.dart';
 import 'package:green_grocery/src/pages/home/view/components/item_tile.dart';
 import 'package:green_grocery/src/services/utils_services.dart';
+import '../../base/controller/navigation_controller.dart';
 import '../../common_widgets/app_name_widget.dart';
 import 'components/category_tile.dart';
 
@@ -22,6 +24,8 @@ class _HomeTabState extends State<HomeTab> {
   GlobalKey<CartIconKey> globalKeyCartItems = GlobalKey<CartIconKey>();
 
   final searchController = TextEditingController();
+  final navigationController = Get.find<NavigationController>();
+
   late Function(GlobalKey) runAddToCardAnimation;
 
   void itemSelectedCartAnimations(GlobalKey gkImage) {
@@ -41,24 +45,31 @@ class _HomeTabState extends State<HomeTab> {
           title: const AppNameWidget(),
           actions: [
             Padding(
-              padding: const EdgeInsets.only(top: 15, right: 15),
-              child: GestureDetector(
-                onTap: () {},
-                child: badge.Badge(
-                    badgeColor: CustomColors.customContrastColor,
-                    badgeContent: const Text(
-                      '2',
-                      style: TextStyle(color: Colors.white, fontSize: 12),
-                    ),
-                    child: AddToCartIcon(
-                      key: globalKeyCartItems,
-                      icon: Icon(
-                        Icons.shopping_cart,
-                        color: CustomColors.customSwatchColor,
-                      ),
-                    )),
-              ),
-            )
+                padding: const EdgeInsets.only(top: 15, right: 15),
+                child: GetBuilder<CartController>(
+                  builder: (controller) {
+                    return GestureDetector(
+                      onTap: () {
+                        navigationController
+                            .navigatePageView(NavigationTabs.cart);
+                      },
+                      child: badge.Badge(
+                          badgeColor: CustomColors.customContrastColor,
+                          badgeContent: Text(
+                            controller.cartItems.length.toString(),
+                            style: const TextStyle(
+                                color: Colors.white, fontSize: 12),
+                          ),
+                          child: AddToCartIcon(
+                            key: globalKeyCartItems,
+                            icon: Icon(
+                              Icons.shopping_cart,
+                              color: CustomColors.customSwatchColor,
+                            ),
+                          )),
+                    );
+                  },
+                ))
           ],
         ),
         body: AddToCartAnimation(

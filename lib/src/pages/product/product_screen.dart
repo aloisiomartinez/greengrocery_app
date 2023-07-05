@@ -6,6 +6,8 @@ import 'package:green_grocery/src/pages/cart/controller/cart_controller.dart';
 import 'package:green_grocery/src/pages/common_widgets/quantity_widget.dart';
 import 'package:green_grocery/src/services/utils_services.dart';
 
+import '../base/controller/navigation_controller.dart';
+
 class ProductScreen extends StatefulWidget {
   ProductScreen({Key? key}) : super(key: key);
 
@@ -21,6 +23,7 @@ class _ProductScreenState extends State<ProductScreen> {
   int cartItemQuantity = 1;
 
   final cartController = Get.find<CartController>();
+  final navigationController = Get.find<NavigationController>();
 
   @override
   Widget build(BuildContext context) {
@@ -112,6 +115,10 @@ class _ProductScreenState extends State<ProductScreen> {
                               item: widget.item,
                               quantity: cartItemQuantity,
                             );
+
+                            // Carrinho
+                            navigationController
+                                .navigatePageView(NavigationTabs.cart);
                           },
                           icon: const Icon(
                             Icons.shopping_cart_outlined,

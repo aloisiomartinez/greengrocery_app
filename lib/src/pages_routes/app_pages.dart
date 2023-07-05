@@ -8,6 +8,7 @@ import 'package:green_grocery/src/pages/splash/splash_screen.dart';
 
 import '../pages/auth/view/sign_in_screen.dart';
 import '../pages/auth/view/sign_up_screen.dart';
+import '../pages/base/binding/navigation_binding.dart';
 
 abstract class AppPages {
   static final pages = <GetPage>[
@@ -31,6 +32,7 @@ abstract class AppPages {
         name: PagesRoutes.baseRoute,
         page: () => const BaseScreen(),
         bindings: [
+          NavigationBinding(),
           HomeBinding(),
           CartBinding(),
         ]),

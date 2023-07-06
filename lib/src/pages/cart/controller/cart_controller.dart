@@ -1,4 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:green_grocery/src/models/order_model.dart';
 import 'package:green_grocery/src/pages/auth/controller/auth_controller.dart';
 import 'package:green_grocery/src/pages/cart/cart_result/cart_result.dart';
 import 'package:green_grocery/src/pages/cart/repository/cart_repository.dart';
@@ -6,6 +8,7 @@ import 'package:green_grocery/src/services/utils_services.dart';
 
 import '../../../models/cart_item_model.dart';
 import '../../../models/item_model.dart';
+import '../../common_widgets/payment_dialog.dart';
 
 class CartController extends GetxController {
   final cartRepository = CartRepository();
@@ -13,6 +16,8 @@ class CartController extends GetxController {
   final utilsServices = UtilsServices();
 
   List<CartItemModel> cartItems = [];
+
+  bool isCheckoutLoading = false;
 
   @override
   void onInit() {
@@ -29,6 +34,38 @@ class CartController extends GetxController {
     }
 
     return total;
+  }
+
+  void setCheckoutLoaing(bool value) {
+    isCheckoutLoading = value;
+    update();
+  }
+
+  Future checkoutCart() async {
+    setCheckoutLoaing(true);
+
+    CartResult<OrderModel> result = await cartRepository.checkoutCart(
+      token: authController.user.token!,
+      total: cartTotalPrice(),
+    );
+
+    setCheckoutLoaing(false);
+
+    result.when(success: (order) {
+      cartItems.clear();
+      update();
+
+      showDialog(
+        context: Get.context!,
+        builder: (_) {
+          return PaymentDialog(
+            order: order,
+          );
+        },
+      );
+    }, error: (message) {
+      utilsServices.showToast(message: "Pedido não confirmado");
+    });
   }
 
   Future<bool> changeItemQuantity({

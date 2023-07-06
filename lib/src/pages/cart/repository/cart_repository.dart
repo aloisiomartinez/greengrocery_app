@@ -1,5 +1,6 @@
 import 'package:green_grocery/src/constants/endpoints.dart';
 import 'package:green_grocery/src/models/cart_item_model.dart';
+import 'package:green_grocery/src/models/order_model.dart';
 import 'package:green_grocery/src/pages/cart/cart_result/cart_result.dart';
 import 'package:green_grocery/src/services/http_manager.dart';
 
@@ -28,6 +29,28 @@ class CartRepository {
       return CartResult<List<CartItemModel>>.success(data);
     } else {
       return CartResult.error("Ocorreu um erro ao recuperar itens do carrinho");
+    }
+  }
+
+  Future<CartResult<OrderModel>> checkoutCart({
+    required String token,
+    required double total,
+  }) async {
+    final result = await _httpManager.restRequest(
+      url: Endpoints.checkout,
+      method: HttpMethods.post,
+      body: {
+        'total': total,
+      },
+      headers: {'X-Parse-Session-Token': token},
+    );
+
+    if (result['result'] != null) {
+      final order = OrderModel.fromJson(result['result']);
+
+      return CartResult<OrderModel>.success(order);
+    } else {
+      return CartResult.error('Não foi possível realizar o pedido');
     }
   }
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:green_grocery/src/config/app_data.dart' as appData;
-import 'package:green_grocery/src/pages/orders/components/order_tile.dart';
+import 'package:green_grocery/src/pages/orders/view/components/order_tile.dart';
 
 class OrdersTab extends StatelessWidget {
   const OrdersTab({Key? key}) : super(key: key);

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../cart/view/cart_tab.dart';
-import '../home/view/home_tab.dart';
-import '../orders/orders_tab.dart';
-import '../profile/profile_tab.dart';
-import 'controller/navigation_controller.dart';
+import 'package:green_grocery/src/pages/base/controller/navigation_controller.dart';
+import 'package:green_grocery/src/pages/cart/view/cart_tab.dart';
+import 'package:green_grocery/src/pages/home/view/home_tab.dart';
+import 'package:green_grocery/src/pages/orders/view/orders_tab.dart';
+import 'package:green_grocery/src/pages/profile/profile_tab.dart';
 
 class BaseScreen extends StatefulWidget {
   const BaseScreen({Key? key}) : super(key: key);

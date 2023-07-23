@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:green_grocery/src/models/cart_item_model.dart';
 import 'package:green_grocery/src/models/order_model.dart';
 import 'package:green_grocery/src/pages/common_widgets/payment_dialog.dart';
-import 'package:green_grocery/src/pages/orders/components/order_status_widget.dart';
+import 'package:green_grocery/src/pages/orders/view/components/order_status_widget.dart';
 import 'package:green_grocery/src/services/utils_services.dart';
 
 class OrderTile extends StatelessWidget {
